@@ -162,6 +162,9 @@ python integrated_vqa.py
 你也可以直接运行任意一个原始任务脚本（如 Sim3_CD.py、Real2_OU.py 等），无需通过集成脚本。
 You can also run any original task script directly (e.g. Sim3_CD.py, Real2_OU.py), without using the integrated script.
 
+**所有脚本的输入路径（图片、注释、标注等）均已统一为以 `datasets` 为根目录的相对路径。只需将数据集放入 `VQA_Generation/datasets/` 下，无需手动修改路径，直接运行脚本即可自动找到数据和标注。**
+All scripts now use relative paths based on the `datasets` root. Just place your datasets under `VQA_Generation/datasets/`, and you can run any script directly without editing paths.
+
 **操作步骤 | Steps:**
 
 1. 进入对应目录 | Enter the corresponding directory:
