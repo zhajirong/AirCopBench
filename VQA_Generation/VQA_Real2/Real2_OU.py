@@ -1,4 +1,5 @@
-import dashscope
+import openai  # Import OpenAI library
+from openai import AzureOpenAI
 import base64
 from PIL import Image
 import io
@@ -16,9 +17,10 @@ import difflib  # Added for SequenceMatcher
 Object Understanding Script - Tasks 2.1, 2.2, 2.3, 2.4
 """
 
-# Set DashScope API key
-DASHSCOPE_API_KEY = os.getenv('DASHSCOPE_API_KEY', 'your_api_key')
-dashscope.api_key = DASHSCOPE_API_KEY
+# Set API key and base URL (using official OpenAI API)
+API_KEY = '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'
+BASE_URL = 'https://api.openai.com/v1'
+client = openai.OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 
 def encode_image(image_path):
@@ -382,71 +384,53 @@ def generate_rule_based_counting_q(frame_objects, uav_id, counter=1):
     }
 
 
-def call_qwen_api(messages, retries=3):
-    """Universal Qwen-VL API call function with retry and option diversity check from split scripts"""
+def call_chatgpt_api(messages, retries=3):
+    """Universal ChatGPT API call function with retry and option diversity check from Sim5_CD.py"""
     for attempt in range(retries):
         try:
-            response = dashscope.MultiModalConversation.call(
-                model="qwen-vl-max-latest",
-                messages=messages
+            # Adapt messages for OpenAI format
+            adapted_messages = []
+            for msg in messages:
+                if msg['role'] == 'system':
+                    adapted_messages.append({"role": "system", "content": msg['content']})
+                elif msg['role'] == 'user':
+                    content_list = []
+                    for item in msg['content']:
+                        if 'image' in item:
+                            content_list.append({
+                                "type": "image_url",
+                                "image_url": {"url": item['image']}
+                            })
+                        elif 'text' in item:
+                            content_list.append({
+                                "type": "text",
+                                "text": item['text']
+                            })
+                    adapted_messages.append({"role": "user", "content": content_list})
+            response = client.chat.completions.create(
+                model="gpt-4o",
+                messages=adapted_messages
             )
-
-            # Handle response - check if it's a streaming response
-            if hasattr(response, '__iter__') and not hasattr(response, 'status_code'):
-                # This is a streaming response, take the first response
-                response = next(response)
-
-            if hasattr(response, 'status_code') and response.status_code == 200 and hasattr(response,
-                                                                                            'output') and response.output:
-                message = response.output.choices[0].message
-                content = message.content
-
-                # Handle case where content might be a list
-                if isinstance(content, list):
-                    # Extract text content
-                    text_content = ""
-                    for item in content:
-                        if isinstance(item, dict) and 'text' in item:
-                            text_content += item['text']
-                    content = text_content
-
-                # Try to parse JSON
-                try:
-                    if isinstance(content, str):
-                        # Extract JSON part (remove possible markdown format)
-                        json_start = content.find('{')
-                        json_end = content.rfind('}') + 1
-                        if json_start != -1 and json_end != 0:
-                            json_str = content[json_start:json_end]
-                            result = json.loads(json_str)
-                            # Check option diversity from split scripts
-                            if "options" in result:
-                                is_diverse, issue = check_option_diversity(result["options"])
-                                if not is_diverse:
-                                    return {"error": f"Option diversity check failed: {issue}"}
-                            return result
-                        else:
-                            return {"error": "Unable to find valid JSON format", "content": content}
+            content = response.choices[0].message.content
+            # Try to parse JSON
+            try:
+                if isinstance(content, str):
+                    json_start = content.find('{')
+                    json_end = content.rfind('}') + 1
+                    if json_start != -1 and json_end != 0:
+                        json_str = content[json_start:json_end]
+                        result = json.loads(json_str)
+                        if "options" in result:
+                            is_diverse, issue = check_option_diversity(result["options"])
+                            if not is_diverse:
+                                return {"error": f"Option diversity check failed: {issue}"}
+                        return result
                     else:
-                        return {"error": "Response content format is incorrect", "content_type": str(type(content)),
-                                "content": content}
-                except json.JSONDecodeError:
-                    return {"error": "JSON parsing failed", "raw_content": content}
-            else:
-                error_msg = "API call failed"
-                if hasattr(response, 'status_code'):
-                    error_msg += f", status code: {response.status_code}"
-                if hasattr(response, 'message'):
-                    error_msg += f", message: {response.message}"
-                if hasattr(response, 'code'):
-                    error_msg += f", code: {response.code}"
-                if hasattr(response, 'request_id'):
-                    error_msg += f", request_id: {response.request_id}"
-                if attempt < retries - 1:
-                    print(f"Retrying API call ({attempt + 1}/{retries})...")
-                    time.sleep(1)  # Brief delay before retry
-                    continue
-                return {"error": error_msg}
+                        return {"error": "Unable to find valid JSON format", "content": content}
+                else:
+                    return {"error": "Response content format is incorrect", "content_type": str(type(content)), "content": content}
+            except json.JSONDecodeError:
+                return {"error": "JSON parsing failed", "raw_content": content}
         except Exception as e:
             if attempt < retries - 1:
                 print(f"Retrying API call ({attempt + 1}/{retries}) due to exception: {str(e)}")
@@ -638,7 +622,7 @@ JSON format:
         }
     ]
 
-    result = call_qwen_api(messages)
+    result = call_chatgpt_api(messages)
     if "error" not in result:
         result["source"] = "Model-Based (Few-Shot)"
         result["question_id"] = f"MDMT_OR_{uav_id}_{counter}"
@@ -738,7 +722,7 @@ JSON format:
         }
     ]
 
-    result = call_qwen_api(messages)
+    result = call_chatgpt_api(messages)
     if "error" not in result:
         result["source"] = "Model-Based (Few-Shot)"
         result["question_id"] = f"MDMT_OG_{uav_id}_{counter}"
@@ -865,7 +849,7 @@ JSON format:
         }
     ]
 
-    result = call_qwen_api(messages)
+    result = call_chatgpt_api(messages)
     if "error" not in result:
         result["source"] = "Model-Based (Few-Shot)"
         result["question_id"] = f"MDMT_OM_{counter}"

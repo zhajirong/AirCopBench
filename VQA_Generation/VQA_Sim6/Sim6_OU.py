@@ -9,15 +9,16 @@ import difflib  # For SequenceMatcher
 import random
 import time
 from collections import defaultdict
-from openai import AzureOpenAI
+import openai  # Import OpenAI library
 
 """
 Object Understanding Script - Tasks 2.1, 2.2, 2.3, 2.4
 """
 
-# Set DashScope API key
-DASHSCOPE_API_KEY = os.getenv('DASHSCOPE_API_KEY', 'your_api_key')
-dashscope.api_key = DASHSCOPE_API_KEY
+# Set API key and base URL (using official OpenAI API)
+API_KEY = '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'
+BASE_URL = 'https://api.openai.com/v1'
+client = openai.OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 
 def encode_image(image_path):
@@ -323,7 +324,7 @@ def save_to_json(data, filename="VQA_MDMT_OU.json"):
 
 
 def call_chatgpt_api(messages, retries=3):
-    """Universal ChatGPT API call function with retry and option diversity check from split scripts"""
+    """Universal ChatGPT API call function with retry and option diversity check from Sim5_CD.py"""
     for attempt in range(retries):
         try:
             # Adapt messages for OpenAI format
@@ -345,24 +346,19 @@ def call_chatgpt_api(messages, retries=3):
                                 "text": item['text']
                             })
                     adapted_messages.append({"role": "user", "content": content_list})
-
             response = client.chat.completions.create(
                 model="gpt-4o",
                 messages=adapted_messages
             )
-
             content = response.choices[0].message.content
-
             # Try to parse JSON
             try:
                 if isinstance(content, str):
-                    # Extract JSON part (remove possible markdown format)
                     json_start = content.find('{')
                     json_end = content.rfind('}') + 1
                     if json_start != -1 and json_end != 0:
                         json_str = content[json_start:json_end]
                         result = json.loads(json_str)
-                        # Check option diversity from split scripts
                         if "options" in result:
                             is_diverse, issue = check_option_diversity(result["options"])
                             if not is_diverse:
@@ -371,14 +367,13 @@ def call_chatgpt_api(messages, retries=3):
                     else:
                         return {"error": "Unable to find valid JSON format", "content": content}
                 else:
-                    return {"error": "Response content format is incorrect", "content_type": str(type(content)),
-                            "content": content}
+                    return {"error": "Response content format is incorrect", "content_type": str(type(content)), "content": content}
             except json.JSONDecodeError:
                 return {"error": "JSON parsing failed", "raw_content": content}
         except Exception as e:
             if attempt < retries - 1:
                 print(f"Retrying API call ({attempt + 1}/{retries}) due to exception: {str(e)}")
-                time.sleep(1)  # Brief delay before retry
+                time.sleep(1)
                 continue
             return {"error": f"API call failed after {retries} attempts: {str(e)}"}
 

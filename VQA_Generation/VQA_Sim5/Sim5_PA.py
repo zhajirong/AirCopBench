@@ -595,7 +595,7 @@ def generate_rule_based_usability_q(annotation, uav_id, q_id):
 
 
 def call_chatgpt_api(messages, retries=3):
-    """Universal ChatGPT API call function with retry and option diversity check from split scripts"""
+    """Universal ChatGPT API call function with retry and option diversity check from Sim5_CD.py"""
     for attempt in range(retries):
         try:
             # Adapt messages for OpenAI format
@@ -617,24 +617,19 @@ def call_chatgpt_api(messages, retries=3):
                                 "text": item['text']
                             })
                     adapted_messages.append({"role": "user", "content": content_list})
-
             response = client.chat.completions.create(
                 model="gpt-4o",
                 messages=adapted_messages
             )
-
             content = response.choices[0].message.content
-
             # Try to parse JSON
             try:
                 if isinstance(content, str):
-                    # Extract JSON part (remove possible markdown format)
                     json_start = content.find('{')
                     json_end = content.rfind('}') + 1
                     if json_start != -1 and json_end != 0:
                         json_str = content[json_start:json_end]
                         result = json.loads(json_str)
-                        # Check option diversity from split scripts
                         if "options" in result:
                             is_diverse, issue = check_option_diversity(result["options"])
                             if not is_diverse:
@@ -643,14 +638,13 @@ def call_chatgpt_api(messages, retries=3):
                     else:
                         return {"error": "Unable to find valid JSON format", "content": content}
                 else:
-                    return {"error": "Response content format is incorrect", "content_type": str(type(content)),
-                            "content": content}
+                    return {"error": "Response content format is incorrect", "content_type": str(type(content)), "content": content}
             except json.JSONDecodeError:
                 return {"error": "JSON parsing failed", "raw_content": content}
         except Exception as e:
             if attempt < retries - 1:
                 print(f"Retrying API call ({attempt + 1}/{retries}) due to exception: {str(e)}")
-                time.sleep(1)  # Brief delay before retry
+                time.sleep(1)
                 continue
             return {"error": f"API call failed after {retries} attempts: {str(e)}"}
 
