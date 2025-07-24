@@ -16,7 +16,7 @@ from openai import AzureOpenAI
 # Set API key and base URL (using official OpenAI API)
 API_KEY = 'your_api_key'
 BASE_URL = 'https://api.openai.com/v1'
-
+client = openai.OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 def encode_image(image_path):
     """Encode image to base64 string"""
