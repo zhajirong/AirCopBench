@@ -1,0 +1,42 @@
+scene_name: demo_circle                        # 当前场景的名称，用于日志标识与视频保存路径
+description: >                                 # ">"用于多行折叠字符串，自动合并为一行，并在每行末尾自动加空格
+  正三角形布局 + UAV0 两圈圆周飞行。
+  观察机为俯视相机，主要用于测试三机视角融合。
+record_fps: 30                                 # 所有无人机图像采集的目标帧率（FPS）
+center: [5990, -4170, 0]                       # 绝对中心
+
+observer_drones:                               # 拍摄/观察用的无人机列表，通常为静止相机位
+  - name: UAV1                                 # 无人机名称（需唯一）
+    pose: [5, 0, -25]                          # 相对于中心点的位移坐标 (x, y, z)，单位：米
+    camera:                                    # 相机方向配置
+      mode: lookdown                           # 快速设定方向：lookdown=垂直俯视
+      pitch_deg: -90                           # 俯仰角（度），覆盖默认模式设定
+
+  - name: UAV2
+    pose: [-5, 0, -25]
+    camera:
+      mode: oblique                            # oblique=斜视，可指定 pitch/yaw
+      pitch_deg: -45                           # 向下倾斜 45°
+      yaw_deg: 30                              # 偏航角：机头朝向，正东为 0°
+
+  - name: UAV3
+    pose: [0, 10, -25]
+    camera:
+      mode: horizon                            # 水平视角（俯仰角 = 0°）
+      yaw_deg: 180                             # 180° 表示正西方向
+
+moving_drones:                                 # 执行轨迹运动的无人机（支持多个）
+  - name: UAV0
+    start: [5.1616, -3.232, -10.16093183]      # 起飞初始位置（相对中心），单位：米
+    motion:                                    # 运动轨迹定义
+      type: circle                             # 类型为圆周运动（支持 circle / csv / figure8 等）
+      radius: 10                               # 圆的半径（米）
+      height: -5                               # 飞行高度（z 轴值，负数为高空）
+      angular_speed_dps: 20                    # 角速度：每秒 20°（单位：度/秒）
+      rounds: 2                                # 表示飞行圈数
+
+#external_cameras:                              # UE视角
+#  - name: external_0
+#    position: [5990, -4190, -10]
+#    pitch_deg: -40
+#    yaw_deg: 0

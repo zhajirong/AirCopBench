@@ -1,0 +1,6 @@
+airsim~=1.8.1
+PyYAML~=6.0.2
+numpy~=1.24.4
+pandas~=2.0.3
+opencv-python~=4.11.0.86
+pygame~=2.6.1

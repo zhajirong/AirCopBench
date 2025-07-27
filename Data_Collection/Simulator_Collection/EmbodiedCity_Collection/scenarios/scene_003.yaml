@@ -1,0 +1,35 @@
+scene_name: demo_circle           # 正三角形+圆周运动+无遮挡
+description: 正三角形观察，俯视，UAV0做一圈5米半径圆周运动
+record_fps: 30                    # 统一目标帧率
+center: [5990, -4170, 0]          # 绝对中心
+
+observer_drones:                 # 观测无人机（正三角形）
+  - name: UAV1
+    pose: [0.0, 5.2, -15.0]     # 顶点，向下俯视
+    camera:
+      mode: lookdown
+      pitch_deg: -90
+
+  - name: UAV2
+    pose: [-3.0, -2.6, -15.0]   # 左下
+    camera:
+      mode: lookdown
+      pitch_deg: -90
+
+  - name: UAV3
+    pose: [3.0, -2.6, -15.0]    # 右下
+    camera:
+      mode: lookdown
+      pitch_deg: -90
+
+moving_drones:                    # 未来支持多架运动机
+  - name: UAV0
+    start: [5.1616, -3.232, -8.0]             # 相对中心点
+    motion:
+      type: circle                # circle / csv / figure8 / custom
+      radius: 5
+      height: -5
+      angular_speed_dps: 15
+      rounds: 1
+
+
