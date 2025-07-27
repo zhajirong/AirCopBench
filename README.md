@@ -108,28 +108,6 @@ AirCopBench/
    - `images/`: Image files directory
    - `annotations/`: Annotation files directory
    - `metadata/`: Metadata files (optional)
-   - `config.json`: Dataset configuration file
-
-#### Dataset Configuration
-
-Each dataset requires a `config.json` file containing the following information:
-
-```json
-{
-  "dataset_name": "VQA_Sim3",
-  "description": "Simulator dataset with urban street scenarios",
-  "image_format": "jpg",
-  "annotation_format": "json",
-  "image_size": [1920, 1080],
-  "supported_tasks": ["CD", "OU", "PA", "SU"],
-  "supported_subtasks": {
-    "CD": ["when", "what", "who", "why"],
-    "OU": ["or", "oc", "og", "om"],
-    "PA": ["quality", "usability", "causal"],
-    "SU": ["scene_description", "scene_comparison", "observing_posture"]
-  }
-}
-```
 
 #### Data Preprocessing Requirements
 
