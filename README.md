@@ -83,6 +83,11 @@ AirCopBench/
 │   ├── VQA_Sim5/                      # Sim5 VQA generation
 │   ├── VQA_Sim6/                      # Sim6 VQA generation
 │   └── VQA_Real2/                     # Real2 VQA generation
+├── AirCopBench_evaluation/            # Evaluation Code for AirCopBench
+│   ├── evaluation.py                  # Evaluation code example using gpt-4o
+├── AirCopBench_sft/                   # Configuration of SFT on AirCopBench
+│   ├── llava13b_vqa_sft.yaml          # Configuration for fine-tuning llava-next-13b
+│   ├── qwen2_5vl_lora_sft.yaml        # Configuration for fine-tuning qwen-2.5-vl/qwen-2-vl
 ├── requirements.txt                    # Main project dependencies
 └── README.md                          # Project documentation
 ```
