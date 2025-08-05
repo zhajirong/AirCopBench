@@ -615,17 +615,4 @@ python AirCopBench_evaluation/evaluation.py # remember to set the api and datase
 
 Thanks to all contributors and the open-source community for inspiration and support.
 
-<!-- --- -->
 
-<!-- ## Citation
-
-If you use this project in your research, please cite: -->
-
-<!-- ```
-@misc{aircopbench2024,
-  title={AirCopBench: Benchmarking Vision-Language Models on Multi-UAV Visual Question Answering},
-  author={             },
-  year={2025},
-  url={https://github.com/zhajirong/AirCopBench}
-}
-``` -->
