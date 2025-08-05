@@ -599,6 +599,18 @@ Annotation files use JSON format and contain the following core fields:
 
 ---
 
+## Training and Evaluation
+
+### Training
+  Please refer to [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory).
+
+### Evaluation
+  We have offered an example code using gpt-4o to conduct evaluation on our benchmark.
+```bash
+python AirCopBench_evaluation/evaluation.py # remember to set the api and dataset path in the code.
+```
+
+
 ## Acknowledgements
 
 Thanks to all contributors and the open-source community for inspiration and support.
