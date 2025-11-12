@@ -1,15 +1,15 @@
-# AirCopBench: Benchmarking Vision-Language Models on Multi-UAV Visual Question Answering
+# AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning
 
 The benchmark is designed to evaluate whether vision-language models (VLMs) can process multi-UAV collaborative visual data for question answering, covering perception, reasoning, and decision-making in complex scenarios.
 
 - **Paper**: _Coming soon_
-- **Project**: _Coming soon_
+- **Project**: https://embodiedcity.github.io/AirCopBench/
 - **Dataset**: _Coming soon_
 
 ---
 
 ## News
-
+- 🎉 Accepted by AAAI 2026!
 - ✅ All datasets and code released
 - ✅ Unified question generation pipeline for 4 datasets & 16 tasks
 - ✅ One-click integration script for interactive VQA generation
