@@ -2,9 +2,9 @@
 
 The benchmark is designed to evaluate whether vision-language models (VLMs) can process multi-UAV collaborative visual data for question answering, covering perception, reasoning, and decision-making in complex scenarios.
 
-- **Paper**: _Coming soon_
+- **Paper**: https://arxiv.org/pdf/2511.11025
 - **Project**: https://embodiedcity.github.io/AirCopBench/
-- **Dataset**: _Coming soon_
+- **Dataset**: https://drive.google.com/drive/folders/1MeCM2_MA5A-1XsIgvSZZacCWk-sistgp
 
 ---
 
