@@ -31,7 +31,9 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ## Task & Subtask List
 
-![image](figures/task.pdf)
+<p align="center">
+  <img src="figures/task.pdf" width="550">
+</p>
 
 - **CD (Collaborative Decision)**
   - `when`: When to collaborate (temporal decision)
