@@ -21,11 +21,12 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ## Dataset Features
 
-- **Multi-dataset, multi-task**: Supports Sim3, Sim5, Sim6, Real2 datasets, covering 4 major tasks (CD, OU, PA, SU) and 16 subtasks
-- **Unified API**: All scripts use OpenAI GPT-4o API for question generation
-- **Plug-and-play**: All input paths are relative to `datasets/`, no manual path editing required
-- **Flexible**: Both integrated and single-script running supported
-- **Complete Pipeline**: From data collection to annotation to VQA generation
+- **Central Contribution**: The first comprehensive benchmark focusing on multi-UAV collaborative embodied perception and reasoning, including over 2.9k multi-view images and over 14.6k Visual Question Answering (VQA) pairs
+- **Varied Data Sources**: simulator data (with 3, 5, and 6 observing UAVs), real-world data (with 2 observing UAVs), and derived data for noisy and loss scenarios
+- **Rich Task Definition**: 4 main task dimensions and 14 subtasks covering collaborative perception, understanding, and reasoning.
+- **Various Perception Degradation**: occlusion, shadow, lighting imbalance, long distance, out of FoV, noise, data loss, and motion blur
+- **Diverse Target Types**: vehicles, drones, pedestrians, and bicycles
+- **Multiple Modalities**: RGB images, text, and point cloud
 
 ---
 
