@@ -1,6 +1,6 @@
 # AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning
 
-The benchmark is designed to evaluate whether vision-language models (VLMs) can process multi-UAV collaborative visual data for question answering, covering perception, reasoning, and decision-making in complex scenarios.
+The benchmark is designed to evaluate whether vision-language models (VLMs) can process multi-UAV collaborative visual data for question answering, covering perception, reasoning, and decision-making in perception degradation scenarios.
 
 - **Paper**: https://arxiv.org/pdf/2511.11025
 - **Project**: https://embodiedcity.github.io/AirCopBench/
