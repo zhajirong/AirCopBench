@@ -64,78 +64,7 @@ AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Ann
   <img src="figures/pipeline.png">
 </p>
 
-
----
-
-## Project Structure
-
-```
-AirCopBench/
-├── Data_Collection/                    # Data collection module
-│   ├── Derived_Collection/             # Image post-processing tools
-│   │   ├── apply_noise_to_image.py    # Image noise addition
-│   │   └── export_to_excel.py         # JSON to Excel export
-│   └── Simulator_Collection/           # Simulator data collection
-│       └── EmbodiedCity_Collection/    # EmbodiedCity simulator collection
-│           ├── main.py                 # Main collection script
-│           ├── config.py               # Configuration parsing
-│           ├── uav_manager.py          # UAV management
-│           ├── motion.py               # Motion pattern definitions
-│           ├── recorder.py             # Video recording
-│           ├── manual_trajectory_recorder.py  # Manual trajectory recording
-│           ├── print_point.py          # Point viewing tool
-│           ├── scenarios/              # Scenario configuration files
-│           ├── requirements.txt        # Dependencies
-│           └── utils.py                # Utility functions
-├── Data_Annotation/                    # Data annotation module
-│   ├── Real2_Sample.json              # Real2 dataset annotation example
-│   ├── Sim3_Sample.json               # Sim3 dataset annotation example
-│   ├── Sim5_Sample.json               # Sim5 dataset annotation example
-│   └── Sim6_Sample.json               # Sim6 dataset annotation example
-├── VQA_Generation/                     # VQA generation module
-│   ├── integrated_vqa.py              # Integrated VQA generation script
-│   ├── VQA_Sim3/                      # Sim3 VQA generation
-│   ├── VQA_Sim5/                      # Sim5 VQA generation
-│   ├── VQA_Sim6/                      # Sim6 VQA generation
-│   └── VQA_Real2/                     # Real2 VQA generation
-├── AirCopBench_evaluation/            # Evaluation Code for AirCopBench
-│   ├── evaluation.py                  # Evaluation code example using gpt-4o
-├── AirCopBench_sft/                   # Configuration of SFT on AirCopBench
-│   ├── llava13b_vqa_sft.yaml          # Configuration for fine-tuning llava-next-13b
-│   ├── qwen2_5vl_lora_sft.yaml        # Configuration for fine-tuning qwen-2.5-vl/qwen-2-vl
-├── requirements.txt                    # Main project dependencies
-└── README.md                          # Project documentation
-```
-
-## Dataset Satistics
-
-AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Annotation, Question Generation, and Quality Control. This systematic approach ensures the validity and high quality of the generated dataset
-
-<p align="center">
-  <img src="figures/statistics.png">
-</p>
-
----
-
 ## VQA Generation
-
-### Dataset Preparation
-
-#### Dataset Organization Structure
-
-1. **Dataset Placement**:
-   ```
-   VQA_Generation/datasets/
-       VQA_Sim3/
-       VQA_Sim5/
-       VQA_Sim6/
-       VQA_Real2/
-   ```
-
-2. **Each dataset folder should contain**:
-   - `images/`: Image files directory
-   - `annotations/`: Annotation files directory
-   - `metadata/`: Metadata files (optional)
 
 ### Quick Start
 
@@ -218,6 +147,56 @@ python Sim3_CD.py
 ```
 - All scripts use relative paths based on `datasets/`. No need to edit paths.
 - Results are saved as JSON files in the script directory.
+
+---
+
+## Project Structure
+
+```
+AirCopBench/
+├── Data_Collection/                    # Data collection module
+│   ├── Derived_Collection/             # Image post-processing tools
+│   │   ├── apply_noise_to_image.py    # Image noise addition
+│   │   └── export_to_excel.py         # JSON to Excel export
+│   └── Simulator_Collection/           # Simulator data collection
+│       └── EmbodiedCity_Collection/    # EmbodiedCity simulator collection
+│           ├── main.py                 # Main collection script
+│           ├── config.py               # Configuration parsing
+│           ├── uav_manager.py          # UAV management
+│           ├── motion.py               # Motion pattern definitions
+│           ├── recorder.py             # Video recording
+│           ├── manual_trajectory_recorder.py  # Manual trajectory recording
+│           ├── print_point.py          # Point viewing tool
+│           ├── scenarios/              # Scenario configuration files
+│           ├── requirements.txt        # Dependencies
+│           └── utils.py                # Utility functions
+├── Data_Annotation/                    # Data annotation module
+│   ├── Real2_Sample.json              # Real2 dataset annotation example
+│   ├── Sim3_Sample.json               # Sim3 dataset annotation example
+│   ├── Sim5_Sample.json               # Sim5 dataset annotation example
+│   └── Sim6_Sample.json               # Sim6 dataset annotation example
+├── VQA_Generation/                     # VQA generation module
+│   ├── integrated_vqa.py              # Integrated VQA generation script
+│   ├── VQA_Sim3/                      # Sim3 VQA generation
+│   ├── VQA_Sim5/                      # Sim5 VQA generation
+│   ├── VQA_Sim6/                      # Sim6 VQA generation
+│   └── VQA_Real2/                     # Real2 VQA generation
+├── AirCopBench_evaluation/            # Evaluation Code for AirCopBench
+│   ├── evaluation.py                  # Evaluation code example using gpt-4o
+├── AirCopBench_sft/                   # Configuration of SFT on AirCopBench
+│   ├── llava13b_vqa_sft.yaml          # Configuration for fine-tuning llava-next-13b
+│   ├── qwen2_5vl_lora_sft.yaml        # Configuration for fine-tuning qwen-2.5-vl/qwen-2-vl
+├── requirements.txt                    # Main project dependencies
+└── README.md                          # Project documentation
+```
+
+## Dataset Satistics
+
+AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Annotation, Question Generation, and Quality Control. This systematic approach ensures the validity and high quality of the generated dataset
+
+<p align="center">
+  <img src="figures/statistics.png">
+</p>
 
 ---
 
