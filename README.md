@@ -19,7 +19,7 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ---
 
-## Features
+## Dataset Features
 
 - **Multi-dataset, multi-task**: Supports Sim3, Sim5, Sim6, Real2 datasets, covering 4 major tasks (CD, OU, PA, SU) and 16 subtasks
 - **Unified API**: All scripts use OpenAI GPT-4o API for question generation
@@ -29,7 +29,7 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ---
 
-## Task & Subtask List
+## Task Definition
 
 AirCopBench encompasses four core task dimensions: Scene Understanding, Object Understanding, Perception Assessment, and Collaborative Decision. These are further segmented into sub-tasks, enabling a more granular assessment of collaborative perception and reasoning capabilities.
 
@@ -38,23 +38,35 @@ AirCopBench encompasses four core task dimensions: Scene Understanding, Object U
 </p>
 
 - **Scene Understanding**
-  - `scene_description`: describe the scene
-  - `scene_comparison`: Scene comparison (compare different scenes)
-  - `observing_posture`: Observing posture (analyze camera/UAV posture)
+  - `scene_description`: interpret and understand scenes from images
+  - `scene_comparison`: compare different scenes
+  - `observing_posture`: analyze camera/UAV posture
+- **Object Understanding**
+  - `object_recognition`: identify objects in images
+  - `object_counting`: count number of objects
+  - `object_grounding`: locate objects in images
+  - `object_matching`: match objects across views
+- - **Perception Assessment**
+  - `quality_assessment`: evaluate image/data quality
+  - `usability_assessment`: assess usefulness for target perception tasks
+  - `causal_assessment`: reason about reasons for perception degradation
 - **Collaborative Decision**
-  - `when`: When to collaborate (temporal decision)
-  - `what`: What to collaborate (content/goal selection)
-  - `who`: Who to collaborate (agent selection)
-  - `why`: Why to collaborate (reasoning for collaboration)
-- **OU (Object Understanding)**
-  - `or`: Object recognition (identify objects in images)
-  - `oc`: Object counting (count number of objects)
-  - `og`: Object grounding (locate objects in images)
-  - `om`: Object matching (match objects across views)
-- **PA (Perception Assessment)**
-  - `quality`: Quality assessment (evaluate image/data quality)
-  - `usability`: Usability assessment (assess usefulness for tasks)
-  - `causal`: Causal assessment (reason about cause-effect)
+  - `when_to_collaborate`: When to collaborate (temporal decision)
+  - `what_to_collaborate`: What to collaborate (content/goal selection)
+  - `who_to_collaborate`: Who to collaborate (agent selection)
+  - `why_to_collaborate`: Why to collaborate (reasoning for collaboration)
+
+
+---
+
+## Dataset Generation Pipeline
+
+AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Annotation, Question Generation, and Quality Control. This systematic approach ensures the validity and high quality of the generated dataset
+
+<p align="center">
+  <img src="figures/pipeline.png">
+</p>
+
 
 ---
 
@@ -620,5 +632,19 @@ python AirCopBench_evaluation/evaluation.py # remember to set the api and datase
 ## Acknowledgements
 
 Thanks to all contributors and the open-source community for inspiration and support.
+
+
+## Citation
+
+If you use this project in your research, please cite the following paper:
+
+```bibtex
+@article{zha2025aircopbench,
+  title={AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning},
+  author={Zha, Jirong and Fan, Yuxuan and Zhang, Tianyu and Chen, Geng and Chen, Yingfeng and Gao, Chen and Chen, Xinlei},
+  journal={arXiv preprint arXiv:2511.11025},
+  year={2025}
+}
+
 
 
