@@ -110,6 +110,14 @@ AirCopBench/
 └── README.md                          # Project documentation
 ```
 
+## Dataset Satistics
+
+AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Annotation, Question Generation, and Quality Control. This systematic approach ensures the validity and high quality of the generated dataset
+
+<p align="center">
+  <img src="figures/statistics.png">
+</p>
+
 ---
 
 ## VQA Generation
@@ -512,64 +520,6 @@ Annotation files use JSON format and contain the following core fields:
 }
 ```
 
-#### Annotation Field Details
-
-##### 1. Image Quality Assessment (Quality)
-- **Scoring Standard**: 1-5 scale, 5 is highest quality
-- **Assessment Dimensions**: 
-  - Sharpness
-  - Color Balance
-  - Artifacts
-  - Exposure
-- **Example**: "Excellent (5/5) - Sharp, clean, balanced colors, no artifacts."
-
-##### 2. Usability Assessment (Usibility)
-- **Assessment Criteria**: 
-  - "1 (Available)": Can be used for tasks
-  - "0 (Unavailable)": Cannot be used for tasks
-- **Considerations**: Occlusion level, target visibility, image completeness
-
-##### 3. Target Type Classification (Object_type)
-- **Supported Types**: 
-  - Vehicles: Vehicles
-  - Pedestrians: Pedestrians
-  - Buildings: Buildings
-  - Traffic Signs: Traffic signs
-- **Annotation Method**: Multi-select labels, support simultaneous annotation of multiple types
-
-##### 4. Perception Issue Annotation (PerceptionIssues)
-- **Coordinate System**: Use percentage coordinates to adapt to different resolutions
-- **Issue Types**:
-  - "Too small": Target too small
-  - "Occluded": Target occluded
-  - "Blurry": Target blurry
-  - "Poor lighting": Insufficient lighting
-- **Annotation Tool**: Rectangle box annotation, supports rotation
-
-#### Annotation Workflow
-
-1. **Project Creation**
-   ```bash
-   label-studio init my_project
-   cd my_project
-   label-studio start
-   ```
-
-2. **Data Import**
-   - Support multiple formats: JSON, CSV, image folders
-   - Batch import functionality
-   - Automatic task generation
-
-3. **Annotation Interface**
-   - Intuitive web interface
-   - Keyboard shortcut support
-   - Real-time saving
-   - Collaborative annotation functionality
-
-4. **Quality Control**
-   - Annotation consistency checking
-   - Duplicate annotation verification
-   - Annotation quality scoring
 
 #### Annotation Example File Details
 
