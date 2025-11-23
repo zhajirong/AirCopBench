@@ -11,11 +11,8 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 ## News
 - 🎉 Accepted by AAAI 2026!
 - ✅ All datasets and code released
-- ✅ Unified question generation pipeline for 4 datasets & 16 tasks
+- ✅ Unified question generation pipeline for 14 tasks
 - ✅ One-click integration script for interactive VQA generation
-- ✅ **NEW**: Data collection pipeline for EmbodiedCity simulator
-- ✅ **NEW**: Data annotation tools and sample files
-- ✅ **NEW**: Image post-processing utilities
 
 ---
 
@@ -46,17 +43,16 @@ AirCopBench encompasses four core task dimensions: Scene Understanding, Object U
   - `object_recognition`: identify objects in images
   - `object_counting`: count number of objects
   - `object_grounding`: locate objects in images
-  - `object_matching`: match objects across views
+  - `object_matching`: match objects across different views
 - - **Perception Assessment**
   - `quality_assessment`: evaluate image/data quality
   - `usability_assessment`: assess usefulness for target perception tasks
   - `causal_assessment`: reason about reasons for perception degradation
 - **Collaborative Decision**
-  - `when_to_collaborate`: When to collaborate (temporal decision)
-  - `what_to_collaborate`: What to collaborate (content/goal selection)
-  - `who_to_collaborate`: Who to collaborate (agent selection)
-  - `why_to_collaborate`: Why to collaborate (reasoning for collaboration)
-
+  - `when_to_collaborate`: identify when collaboration is essential for current UAV (temporal decision)
+  - `what_to_collaborate`: determine the information that should be shared between UAVs (content selection)
+  - `who_to_collaborate`: assess which UAVs are best suited for collaboration (agent selection)
+  - `why_to_collaborate`: explore the reasons for required information exchange among UAVs (reasoning for collaboration)
 
 ---
 
@@ -140,22 +136,6 @@ AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Ann
    - `images/`: Image files directory
    - `annotations/`: Annotation files directory
    - `metadata/`: Metadata files (optional)
-
-#### Data Preprocessing Requirements
-
-1. **Image Format**: Supports JPG, PNG formats, recommended to unify as JPG format
-2. **Image Size**: Recommended unified resolution, such as 1920x1080
-3. **Annotation Format**: JSON format exported from Label Studio
-4. **File Naming**: Recommended unified naming convention, such as `{scene_id}_{uav_id}_{frame_id}.jpg`
-
-#### Data Quality Check
-
-Before running VQA generation, it is recommended to perform the following checks:
-
-1. **Image Integrity**: Ensure all image files can be opened normally
-2. **Annotation Integrity**: Verify annotation file format is correct
-3. **Data Consistency**: Check one-to-one correspondence between images and annotation files
-4. **Path Correctness**: Confirm all relative paths are set correctly
 
 ### Quick Start
 
