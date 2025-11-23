@@ -31,11 +31,17 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ## Task & Subtask List
 
+AirCopBench encompasses four core task dimensions: Scene Understanding, Object Understanding, Perception Assessment, and Collaborative Decision. These are further segmented into sub-tasks, enabling a more granular assessment of collaborative perception and reasoning capabilities.
+
 <p align="center">
-  <img src="figures/task.png" width="550">
+  <img src="figures/task.png">
 </p>
 
-- **CD (Collaborative Decision)**
+- **Scene Understanding**
+  - `scene_description`: describe the scene
+  - `scene_comparison`: Scene comparison (compare different scenes)
+  - `observing_posture`: Observing posture (analyze camera/UAV posture)
+- **Collaborative Decision**
   - `when`: When to collaborate (temporal decision)
   - `what`: What to collaborate (content/goal selection)
   - `who`: Who to collaborate (agent selection)
@@ -49,10 +55,6 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
   - `quality`: Quality assessment (evaluate image/data quality)
   - `usability`: Usability assessment (assess usefulness for tasks)
   - `causal`: Causal assessment (reason about cause-effect)
-- **SU (Scene Understanding)**
-  - `scene_description`: Scene description (describe the scene)
-  - `scene_comparison`: Scene comparison (compare different scenes)
-  - `observing_posture`: Observing posture (analyze camera/UAV posture)
 
 ---
 
