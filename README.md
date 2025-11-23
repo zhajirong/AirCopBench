@@ -9,7 +9,7 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 ---
 
 ## News
-- 🎉 Accepted by AAAI 2026!
+- 🎉 Our paper has been accepted by AAAI 2026!
 - ✅ All datasets and code released
 - ✅ Unified question generation pipeline for 14 tasks
 - ✅ One-click integration script for interactive VQA generation
@@ -64,11 +64,11 @@ AirCopBench generation pipeline includes 4 main steps: Data Collection, Data Ann
   <img src="figures/pipeline.png">
 </p>
 
-## VQA Generation
+### VQA Generation
 
-### Quick Start
+#### Quick Start
 
-#### 1. Install dependencies
+##### 1. Install dependencies
 
 ```bash
 # Main project dependencies
@@ -79,13 +79,13 @@ cd Data_Collection/Simulator_Collection/EmbodiedCity_Collection
 pip install -r requirements.txt
 ```
 
-#### 2. Configure OpenAI API Key
+##### 2. Configure OpenAI API Key
 
 ```bash
 export OPENAI_API_KEY=your_api_key
 ```
 
-#### 3. Run the integrated script
+##### 3. Run the integrated script
 
 ```bash
 python integrated_vqa.py
@@ -93,9 +93,9 @@ python integrated_vqa.py
 - Follow the prompts to select dataset, task, and subtask.
 - Results will be saved as JSON files in the current directory.
 
-#### 4. Advanced Configuration Options
+##### 4. Advanced Configuration Options
 
-##### API Configuration Optimization
+###### API Configuration Optimization
 
 ```python
 # Set detailed API configuration in scripts
@@ -106,38 +106,21 @@ openai.api_base = "https://api.openai.com/v1"  # Optional: custom API endpoint
 openai.timeout = 60  # Set timeout (seconds)
 ```
 
-##### Batch Processing Configuration
+###### Batch Processing Configuration
 
 ```bash
 # Batch process multiple datasets
 python integrated_vqa.py --batch --datasets Sim3,Sim5,Sim6,Real2 --tasks CD,OU,PA,SU
 ```
 
-##### Output Format Configuration
+###### Output Format Configuration
 
 ```bash
 # Specify output format and path
 python integrated_vqa.py --output-format json --output-dir ./results
 ```
 
-#### 5. Performance Optimization Recommendations
-
-##### Concurrent Processing
-- Use multi-process processing for large amounts of data
-- Reasonably set API request frequency to avoid triggering limits
-- Utilize caching mechanisms to reduce duplicate requests
-
-##### Memory Management
-- Process large datasets in batches
-- Release unnecessary data in time
-- Use generators to process streaming data
-
-##### Error Handling
-- Implement automatic retry mechanisms
-- Record detailed error logs
-- Support checkpoint resume functionality
-
-### Running a Single Script
+#### Running a Single Script
 
 You can also run any original task script directly (e.g. Sim3_CD.py, Real2_OU.py):
 
