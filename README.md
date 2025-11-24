@@ -10,7 +10,7 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ## News
 - 🎉 Our paper has been accepted by AAAI 2026!
-- ✅ All datasets and code released
+- ✅ All datasets, code, and supplementary material released
 - ✅ Unified question generation pipeline for 14 tasks
 - ✅ One-click integration script for interactive VQA generation
 
@@ -18,10 +18,10 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 
 ## Dataset Features
 
-- 💡 **Central Contribution**: The first comprehensive benchmark focusing on multi-UAV collaborative embodied perception and reasoning, including over 2.9k multi-view images and over 14.6k Visual Question Answering (VQA) pairs.
-- 🔄 **Varied Data Sources**: simulator data (with 3, 5, and 6 observing UAVs), real-world data (with 2 observing UAVs), and derived data for noisy and loss scenarios/
+- 💡 **Central Contribution**: The **first** comprehensive benchmark focusing on multi-UAV collaborative embodied perception and reasoning, including over 2.9k multi-view images and over 14.6k Visual Question Answering (VQA) pairs.
+- 🔄 **Varied Data Sources**: simulator data (with 3, 5, and 6 observing UAVs), real-world data (with 2 observing UAVs), and derived data for noisy and loss scenarios.
 - 📋 **Rich Task Definition**: 4 main task dimensions and 14 subtasks covering collaborative perception, understanding, and reasoning.
-- 🌫️ **Various Perception Degradation**: occlusion, shadow, lighting imbalance, long distance, out of FoV, noise, data loss, and motion blur/
+- 🌫️ **Various Perception Degradation**: occlusion, shadow, lighting imbalance, long distance, out of FoV, noise, data loss, and motion blur.
 - 🎯 **Diverse Target Types**: vehicles, drones, pedestrians, and bicycles
 - 🧩 **Multiple Modalities**: RGB images, text, and point cloud
 
@@ -35,20 +35,20 @@ AirCopBench encompasses four core task dimensions: Scene Understanding, Object U
   <img src="figures/task.png">
 </p>
 
-- **Scene Understanding**
+- **Scene Understanding (SU)**
   - `scene_description`: interpret and understand scenes from images
   - `scene_comparison`: compare different scenes
   - `observing_posture`: analyze camera posture
-- **Object Understanding**
+- **Object Understanding (OU)**
   - `object_recognition`: identify objects in images
   - `object_counting`: count number of objects
   - `object_grounding`: locate objects in images
   - `object_matching`: match objects across different views
-- - **Perception Assessment**
+- - **Perception Assessment (PA)**
   - `quality_assessment`: evaluate image quality
   - `usability_assessment`: assess usefulness for target perception tasks
   - `causal_assessment`: reason about reasons for perception degradation
-- **Collaborative Decision**
+- **Collaborative Decision (CD)**
   - `when_to_collaborate`: identify when collaboration is essential for current UAV (temporal decision)
   - `what_to_collaborate`: determine the information that should be shared between UAVs (content selection)
   - `who_to_collaborate`: assess which UAVs are best suited for collaboration (agent selection)
