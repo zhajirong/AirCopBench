@@ -14,7 +14,7 @@ import openai  # Import OpenAI library
 from openai import AzureOpenAI
 
 # Set API key and base URL (using official OpenAI API)
-API_KEY = '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'
+API_KEY = 'your_api_key'
 BASE_URL = 'https://api.openai.com/v1'
 client = openai.OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
