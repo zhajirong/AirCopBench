@@ -22,8 +22,8 @@ The benchmark is designed to evaluate whether vision-language models (VLMs) can 
 - 🔄 **Varied Data Sources**: simulator data (with 3, 5, and 6 observing UAVs), real-world data (with 2 observing UAVs), and derived data for noisy and loss scenarios.
 - 📋 **Rich Task Definition**: 4 main task dimensions and 14 subtasks covering collaborative perception, understanding, and reasoning.
 - 🌫️ **Various Perception Degradation**: occlusion, shadow, lighting imbalance, long distance, out of FoV, noise, data loss, and motion blur.
-- 🎯 **Diverse Target Types**: vehicles, drones, pedestrians, and bicycles
-- 🧩 **Multiple Modalities**: RGB images, text, and point cloud
+- 🎯 **Diverse Target Types**: vehicles, drones, pedestrians, and bicycles.
+- 🧩 **Multiple Modalities**: RGB images, text, and point cloud.
 
 ---
 
