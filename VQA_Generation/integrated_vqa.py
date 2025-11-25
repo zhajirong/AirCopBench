@@ -3,15 +3,11 @@ import sys
 import importlib
 import json
 
-# =====================
-# 数据集统一根目录配置
-# =====================
-# 请将所有数据集（如Sim3、Sim5、Sim6、Real2）文件夹放在 datasets/ 目录下
+
 DATASETS_ROOT = os.path.join(os.path.dirname(__file__), 'datasets')
-# 例如：datasets/VQA_Sim3/、datasets/VQA_Sim5/...
+# eg：datasets/VQA_Sim3/、datasets/VQA_Sim5/...
 # =====================
 
-# 数据集、任务、子任务映射
 DATASET_CONFIG = {
     'Sim3': {
         'dir': 'VQA_Sim3',
@@ -55,7 +51,6 @@ DATASET_CONFIG = {
     }
 }
 
-# 任务到脚本文件名映射
 TASK_FILE_MAP = {
     'CD': 'CD',
     'OU': 'OU',
@@ -63,7 +58,6 @@ TASK_FILE_MAP = {
     'SU': 'SU'
 }
 
-# 子任务到函数名映射（部分函数名有差异，需适配）
 SUBTASK_FUNC_MAP = {
     # CD
     'when': 'generate_rule_based_collaboration_when_q',
@@ -87,72 +81,86 @@ SUBTASK_FUNC_MAP = {
 
 
 def user_select():
-    # 数据集选择
+    """
+    Prompts the user to select a dataset, task, and subtask.
+    """
+    # Dataset selection
     while True:
-        print('\n可选数据集:')
+        print('\nAvailable Datasets:')
         for ds in DATASET_CONFIG:
             print(f'  - {ds}')
-        dataset = input('请输入数据集名称: ').strip()
+        dataset = input('Please enter the dataset name: ').strip()
         if dataset in DATASET_CONFIG:
             break
-        print('无效数据集，请重新输入。')
-    # 任务选择
+        print('Invalid dataset. Please try again.')
+        
+    # Task selection
     while True:
-        print(f'\n可选任务:')
+        print(f'\nAvailable Tasks for {dataset}:')
         for t in DATASET_CONFIG[dataset]['tasks']:
             print(f'  - {t}')
-        task = input('请输入任务名: ').strip()
+        task = input('Please enter the task name: ').strip()
         if task in DATASET_CONFIG[dataset]['tasks']:
             break
-        print('无效任务，请重新输入。')
-    # 子任务选择
+        print('Invalid task. Please try again.')
+        
+    # Subtask selection
     while True:
-        print(f'\n可选子任务:')
+        print(f'\nAvailable Subtasks for {dataset} - {task}:')
         for st in DATASET_CONFIG[dataset]['tasks'][task]:
             print(f'  - {st}')
-        subtask = input('请输入子任务名: ').strip()
+        subtask = input('Please enter the subtask name: ').strip()
         if subtask in DATASET_CONFIG[dataset]['tasks'][task]:
             break
-        print('无效子任务，请重新输入。')
+        print('Invalid subtask. Please try again.')
+        
     return dataset, task, subtask
 
 
 def main():
-    # 检查datasets文件夹是否存在，不存在则创建
+    """
+    Main function to ensure dataset root directory exists,
+    get user selection, dynamically import the corresponding module,
+    and attempt to run the main process or the selected function.
+    """
+    # Check and create the dataset root directory
     if not os.path.exists(DATASETS_ROOT):
         os.makedirs(DATASETS_ROOT)
-        print(f"已创建数据集根目录: {DATASETS_ROOT}")
-        print("请将各数据集文件夹（如VQA_Sim3、VQA_Sim5等）放入该目录下！")
+        print(f"Created dataset root directory: {DATASETS_ROOT}")
+        print("Please place your dataset folders (e.g., VQA_Sim3, VQA_Sim5, etc.) into this directory!")
         sys.exit(0)
 
     dataset, task, subtask = user_select()
     dataset_dir = os.path.join(DATASETS_ROOT, DATASET_CONFIG[dataset]['dir'])
-    uav_num = DATASET_CONFIG[dataset]['uav_num']
+    # uav_num = DATASET_CONFIG[dataset]['uav_num'] # This variable is not used in the original logic flow
+    
+    # Construct module information
     script_file = os.path.join(dataset_dir, f"{dataset}_{TASK_FILE_MAP[task]}.py")
     module_name = f"datasets.{DATASET_CONFIG[dataset]['dir']}.{dataset}_{TASK_FILE_MAP[task]}"
     func_name = SUBTASK_FUNC_MAP[subtask]
 
-    # 动态导入对应脚本模块
+    # Dynamically import the corresponding script module
     try:
         module = importlib.import_module(module_name)
     except Exception as e:
-        print(f"导入模块失败: {module_name}", e)
+        print(f"Failed to import module: {module_name}")
+        print(f"Error: {e}")
         sys.exit(1)
 
-    # 检查函数是否存在
+    # Check if the function exists
     if not hasattr(module, func_name):
-        print(f"{module_name} 中未找到函数 {func_name}")
+        print(f"Function {func_name} not found in module {module_name}")
         sys.exit(1)
 
-    # 运行原main流程，自动适配参数
+    # Run the original 'main' process if available
     if hasattr(module, 'main'):
-        print(f"直接运行 {module_name}.main()，将自动完成全部问题生成（包含所有子任务）")
+        print(f"Running {module_name}.main() directly. This should automatically complete all question generation (including all subtasks).")
         module.main()
         return
     else:
-        print(f"未找到main函数，仅可调用单个问题生成函数 {func_name}")
-        print("请根据具体函数参数手动补充调用逻辑")
+        print(f"No 'main' function found. Only single question generation function {func_name} can be called.")
+        print("Please manually add the calling logic based on the specific function parameters.")
         sys.exit(1)
-
+        
 if __name__ == "__main__":
     main() 
