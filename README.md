@@ -1,6 +1,6 @@
 # AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning
 
-The benchmark is designed to evaluate whether vision-language models (VLMs) can process multi-UAV collaborative visual data for question answering, covering perception, reasoning, and decision-making in perception degradation scenarios.
+The benchmark is designed to evaluate whether Multimodal Large Language Models (MLLMs) can process multi-UAV collaborative visual data for question answering, covering perception, reasoning, and decision-making in perception degradation scenarios.
 
 - **Paper**: https://arxiv.org/pdf/2511.11025
 - **Project**: https://embodiedcity.github.io/AirCopBench/
@@ -44,7 +44,7 @@ AirCopBench encompasses four core task dimensions: Scene Understanding, Object U
   - `object_counting`: count number of objects
   - `object_grounding`: locate objects in images
   - `object_matching`: match objects across different views
-- - **Perception Assessment (PA)**
+- **Perception Assessment (PA)**
   - `quality_assessment`: evaluate image quality
   - `usability_assessment`: assess usefulness for target perception tasks
   - `causal_assessment`: reason about reasons for perception degradation
