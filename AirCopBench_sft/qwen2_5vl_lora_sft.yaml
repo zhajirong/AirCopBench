@@ -14,7 +14,7 @@ lora_target: all
 ### dataset
 dataset: uav_vqa_sft  # video: mllm_video_demo
 template: qwen2_vl
-cutoff_len: 2048
+cutoff_len: 10240
 max_samples: 100000
 overwrite_cache: true
 preprocessing_num_workers: 16
