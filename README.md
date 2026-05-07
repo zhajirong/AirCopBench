@@ -224,11 +224,14 @@ Thanks to all contributors and the open-source community for inspiration and sup
 If you use this project in your research, please cite the following paper:
 
 ```bibtex
-@article{zha2025aircopbench,
-  title={AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning},
+@inproceedings{zha2026aircopbench,
+  title={Aircopbench: A benchmark for multi-drone collaborative embodied perception and reasoning},
   author={Zha, Jirong and Fan, Yuxuan and Zhang, Tianyu and Chen, Geng and Chen, Yingfeng and Gao, Chen and Chen, Xinlei},
-  journal={arXiv preprint arXiv:2511.11025},
-  year={2025}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={40},
+  number={2},
+  pages={1507--1515},
+  year={2026}
 }
 
 
