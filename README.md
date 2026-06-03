@@ -9,6 +9,7 @@ The benchmark is designed to evaluate whether Multimodal Large Language Models (
 ---
 
 ## News
+- 2026.06.03. We fixed several bugs in the dataset and uploaded the latest version to the same link.
 - 🎉 Our paper has been accepted by AAAI 2026!
 - ✅ All datasets, code, and supplementary material released
 - ✅ Unified question generation pipeline for 14 tasks
